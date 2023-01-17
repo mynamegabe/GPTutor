@@ -1,0 +1,23 @@
+{% extends "base2.html" %}
+{% block content %}
+<div class="main-body">
+    <div class="flex-column">
+        <div>
+            <h1>Update Material {{ uuid }}</h1>
+            <form action="http://localhost:8000/materialsedit/{{ uuid }}" method="post">
+                <label for="materials_name">Name</label>
+                <input type="text" name="materials_name", value = "{{ materials_name }}">
+                <label for="materials_oed">Open Ended Data</label>
+                <input type="text" name="materials_oed", value = "{{ materials_oed }}">
+                <label for="materials_mcq">MCQ Data</label>
+                <input type="text" name="materials_mcq", value = "{{ materials_mcq }}">
+                <label for="materials_sud">Summary Data</label>
+                <input type="text" name="materials_sud", value = "{{ materials_sud }}">
+                <label for="materials_kpd">Key Points Data</label>
+                <input type="text" name="materials_kpd", value = "{{ materials_kpd }}">
+                <button type="submit" class="btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

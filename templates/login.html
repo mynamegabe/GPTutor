@@ -1,0 +1,21 @@
+{% set page = "login" %}
+{% extends "base2.html" %}
+{% block content %}
+<div class="main-body center">
+    <div class="flex-row">
+        <div>
+            <h1>Login</h1>
+            <form action="{{ url_for('login') }}" method="post">
+                <label for="email">Email</label>
+                <input type="text" name="email">
+                <label for="password">Password</label>
+                <input type="password" name="password">
+                <button type="submit" class="btn-primary">Login</button>
+                <text class="error"> {{ error }} </text>
+                <p>Don't have an account? <a class="highlight" href="{{ url_for('register') }}">Sign Up!</a></p>
+                <text><a class="contactlink" href="/contact">Forget Password</a>!</text>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

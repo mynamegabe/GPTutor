@@ -1,0 +1,26 @@
+{% extends "base2.html" %}
+{% block content %}
+<div class="main-body">
+    <div class="flex-column">
+        <h1>Hello, <span class="highlight">{{ request.session["first_name"] }}</span>!</h1>
+        <div class="flex-column">
+            <h2>View your past materials!</h2>
+            <table>
+            <tr id="header">
+                <th>Name</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+            {% for material in materials %}
+            <tr>
+                <td><a href="/materials/{{ material.uuid }}">{{ material.name }}</a></td>
+                <td>{{ material.status }}</td>
+                <td>{{ material.created }}</td>
+                <td><a href="/materials/{{ material.uuid }}/delete" class="icon"><img src="/static/delete_1.png"/></a></td>
+            </tr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

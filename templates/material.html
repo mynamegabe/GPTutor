@@ -1,0 +1,108 @@
+{% extends "base2.html" %}
+{% block content %}
+<div class="main-body">
+    <div class="flex-column">
+        <h1>Hello, <span class="highlight">{{ request.session["first_name"] if "first_name" in request.session else "Anonymous" }}</span>!</h1>
+        <div class="flex-column">
+            <div>
+            <h2>{{ materials["name"] }}</h2>
+            </div>
+            <div class="flex-row center">
+                <a href="/materialsedit/{{ materials['uuid'] }}" class="icon medium"><img src="/static/edit.png"/></a>
+                <a href="/materials/{{ materials['uuid'] }}/quizlet" class="btn-primary" id="export">Export</a>
+                <div class="toggle {{ 'active' if materials['privacy'] == 'public' }}" id="privacy" data-uuid="{{ materials['uuid'] }}">
+                    <span class="switch"></span>
+                </div>
+                <p class="privacy">{{ "Private" if materials["privacy"] == "private" else "Public" }}</p>
+            </div>
+            <div id="openended" class="accordion {{ 'on' if materials['openended'] }}">
+                <h2>
+                    <span>Open-ended Questions</span> 
+                    {% if materials["openended"] %}
+                        <div>
+                            <a href="/materials/{{ materials['uuid'] }}/quiz" class="go">></a>
+                            <button class="icon highlight tts" data-uuid="{{ materials['uuid'] }}" data-material="openended"><img src="/static/text-to-speech.png"/></button>
+                            <span class="badge">{{ materials["openended"]|length }}</span>
+                        </div>
+                    {% endif %}
+                </h2>
+                {% for m in materials["openended"] %}
+                <div>
+                    <h3>
+                        {{ m[0] }}
+                    </h3>
+                    <p class="answer">
+                        Answer: {{ m[1] }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="mcq" class="accordion {{ 'on' if materials['mcq'] }}">
+                <h2>
+                    <span>Multiple Choice Questions</span>
+                    {% if materials["mcq"] %}
+                    <div>
+                        <a href="/materials/{{ materials['uuid'] }}/mcq" class="go">></a>
+                        <button class="icon highlight tts" data-uuid="{{ materials['uuid'] }}" data-material="mcq"><img src="/static/text-to-speech.png"/></button>
+                        <span class="badge">{{ materials["mcq"]|length }}</span>
+                    </div>
+                    {% endif %}
+                </h2>
+                {% set mapping = {0: "A", 1: "B", 2: "C", 3: "D"} %}
+                {% if materials["mcq"] %}
+                    {% for m in materials["mcq"] %}
+                    <div>
+                        <h3>
+                            {{ m[0] }}
+                        </h3>
+                        <p class="options">
+                            <!-- Options: {{ m[1] }} -->
+                            <div class="options">
+                                {% for o in range(m[1]|length) %}
+                                <span class="option">{{mapping[o]}}) {{ m[1][o] }}</span>
+                                {% endfor %}
+                            </div>
+                        </p>
+                        <p class="answer">
+                            Answer: {{ m[2] }}
+                        </p>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div id="summary" class="accordion {{ 'on' if materials['summary'] }}">
+                <h2>
+                    <span>Summary</span>
+                    {% if materials["summary"] %}
+                    <div>
+                        <button class="icon highlight tts" data-uuid="{{ materials['uuid'] }}" data-material="summary"><img src="/static/text-to-speech.png"/></button>
+                        <span class="badge">{{ materials["summary"]|length }}</span>
+                    </div>
+                    {% endif %}
+                </h2>
+                <p id="summary">
+                    {{ materials["summary"] }}
+                </p>
+            </div>
+            <div id="keypoints" class="accordion {{ 'on' if materials['keyPoints'] }}">
+                <h2>
+                    <span>Key Points</span>
+                    {% if materials["keyPoints"] %}
+                    <div>
+                        <button class="icon highlight tts" data-uuid="{{ materials['uuid'] }}" data-material="keyPoints"><img src="/static/text-to-speech.png"/></button>
+                        <span class="badge">{{ materials["keyPoints"]|length }}</span>
+                    </div>
+                    {% endif %}
+                </h2>
+                {% for k in materials["keyPoints"] %}
+                <ul>
+                    <li class="answer">
+                        {{ k }}
+                    </li>
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

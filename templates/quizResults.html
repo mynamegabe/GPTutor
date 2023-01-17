@@ -1,0 +1,17 @@
+{% extends "base2.html" %}
+{% block content %}
+<div class="main-body">
+    <div class="flex-column">
+        <h1>Hello, <span class="highlight">{{ request.session["first_name"] }}</span>!</h1>
+        <h2>{{ materials["name"] }} Quiz</h2>
+        <form action="none">
+            {% for i in range(questions|length) %}
+            {% set q = questions[i] %}
+            <label for="question">{{ q[0] }}</label>
+            <input type="text" name="answer" placeholder="..." name="question" id="{{ i }}" value="{{ q[2] }}" disabled>
+            <span class="answer"><span class="highlight">Correct Answer:</span> {{ q[1] }}</span>
+            {% endfor %}
+        </form>
+    </div>
+</div>
+{% endblock %}

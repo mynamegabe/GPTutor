@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>GPTutor</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&family=Merriweather&family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <script
+    src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/init.js"></script>
+</head>
+<body class="alt">
+    {% if page == "login" or page == "register" %}
+    {% include "nav.html" %}
+    {% else %}
+    {% include "nav2.html" %}
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+    <div class="footer">
+            
+    </div>
+</body>
+<footer>
+    <script type="text/javascript" src="/static/script.js"></script>
+</footer>
+</html>

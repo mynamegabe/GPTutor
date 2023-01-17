@@ -1,0 +1,37 @@
+{% extends "base2.html" %}
+{% block content %}
+<div class="main-body">
+    <div class="flex-column">
+        <h1>Hello, <span class="highlight">{{ request.session["first_name"] }}</span>!</h1>
+        <form class="full" action="/start" method="POST" enctype="multipart/form-data">
+            <div class="flex-column">
+                <h2>Get started with a new topic!</h2>
+                <label for="topic">Topic Name</label>
+                <input type="text" id="topic" name="topic" placeholder="Enter your topic name" autocomplete="off">
+                <label for="query">Enter a URL to get started! <span id="selectpage" class="highlight">> or select specific text from your page</label>
+                <input type="text" id="query" name="query" placeholder="https://en.wikipedia.org/wiki/Wikipedia:Random" autocomplete="off">
+                <div id="select">
+                    <iframe id="preview" src="" width="100%" height="500px"></iframe>
+                    <textarea id="selected" name="selected" placeholder="Select text from the page or enter your own to get started!"></textarea>
+                </div>
+                <div>
+                    <label for="file">Or, upload an image:</label>
+                    <input name="file" type="file"> 
+                </div>
+            </div>
+            <div class="flex-row">
+                <button type="button" class="btn-select" id="keyPoints">Key Points</button>
+                <button type="button" class="btn-select" id="mcq">Multiple Choice Questions</button>
+                <button type="button" class="btn-select" id="openended">Open Ended Questions</button>
+                <button type="button" class="btn-select" id="summary">Summary</button>
+                <input type="hidden" id="keyPoints" name="keyPoints" value="false" required>
+                <input type="hidden" id="mcq" name="mcq" value="false" required>
+                <input type="hidden" id="openended" name="openended" value="false" required>
+                <input type="hidden" id="summary" name="summary" value="false" required>
+            </div>
+            <input type="hidden" id="type" name="qtype" value="query">
+            <button type="submit" class="btn-primary">Get Started!</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

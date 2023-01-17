@@ -1,0 +1,17 @@
+{% extends "base2.html" %}
+{% block content %}
+<div class="main-body">
+    <div class="flex-column">
+        <h1>Hello, <span class="highlight">{{ request.session["first_name"] }}</span>!</h1>
+        <h2>{{ materials["name"] }} Quiz</h2>
+        <form action="post" method="post" id="quiz" data-uuid="{{ materials['uuid'] }}">
+            {% for i in range(questions|length) %}
+            {% set q = questions[i] %}
+            <label for="question">{{ q }}</label>
+            <input type="text" name="answer" placeholder="..." name="question" id="{{ i }}">
+            {% endfor %}
+            <button type="button" value="Submit" class="btn-primary" id="submit-quiz">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

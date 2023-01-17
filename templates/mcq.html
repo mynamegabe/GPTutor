@@ -1,0 +1,30 @@
+{% extends "base2.html" %}
+{% block content %}
+<div class="main-body">
+    <div class="flex-column">
+        <h1>Hello, <span class="highlight">{{ request.session["first_name"] }}</span>!</h1>
+        <h2>{{ materials["name"] }} MCQ</h2>
+        {% set mapping = {0: 'A', 1: 'B', 2: 'C', 3: 'D'} %}
+        <form action="post" method="post" id="mcq" data-uuid="{{ materials['uuid'] }}">
+            {% for i in range(questions|length) %}
+            {% set q = questions[i] %}
+            <label for="question" class="question">{{ q }}</label>
+            <!-- <select name="question" id="question">
+                {% for j in range(choices[i]|length) %}
+                {% set a = choices[i][j] %}
+                <option value="{{ mapping[j] }}">{{ mapping[j] }}. {{ a }}</option>
+                {% endfor %}
+            </select> -->
+            {% for j in range(choices[i]|length) %}
+            {% set a = choices[i][j] %}
+            <div class="radio">
+                <input type="radio" name="{{ i }}" value="{{ mapping[j] }}" id="{{ mapping[j] }}" />
+                <label for="{{ mapping[j] }}">{{ mapping[j] }}. {{ a }}</label>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            <button type="button" value="Submit" class="btn-primary" id="submit-mcq">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

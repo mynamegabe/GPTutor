@@ -1,0 +1,16 @@
+uvicorn
+fastapi
+jinja2
+mysql-connector-python
+websockets
+gunicorn
+requests
+python-multipart
+werkzeug
+websocket-client
+asyncio
+itsdangerous
+openai
+pebble
+pytesseract
+unidecode
