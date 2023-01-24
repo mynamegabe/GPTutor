@@ -2,11 +2,11 @@
 A Top 8 NUS Hack&Roll Project
 
 Dependencies
-```bash
+```console
 pip3 install -r requirements.txt
 ```
 
 Usage
-```bash
+```console
 python3 app.py
 ```
